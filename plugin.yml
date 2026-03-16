@@ -1,6 +1,6 @@
 name: HelpUI
 main: HelpUI\Main
-version: 1.0.0
+version: 1.0.1
 api: 5.0.0
 author: ZyberPE
 
@@ -9,7 +9,7 @@ depend:
 
 commands:
   help:
-    description: View server help
+    description: Server help menu
     usage: "/help"
     permission: helpui.use
 
