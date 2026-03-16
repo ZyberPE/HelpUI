@@ -1,0 +1,21 @@
+form:
+  title: "&bServer Help"
+
+  content: |
+    &eWelcome to the server help menu!
+
+    &aUseful Commands:
+
+    &f/help &7- Open this menu
+    &f/rules &7- View server rules
+    &f/info &7- Server information
+    &f/report &7- Report a player
+    &f/spawn &7- Teleport to spawn
+
+    &bNeed more help? Ask staff!
+
+  close-button: "&cClose"
+
+messages:
+  open: "&eOpening help menu..."
+  close: "&7You can reopen this anytime with &b/help"
