@@ -15,7 +15,7 @@ class HelpCommand extends Command{
     private Main $plugin;
 
     public function __construct(Main $plugin){
-        parent::__construct("help", "View server help");
+        parent::__construct("help", "Server help menu");
 
         $this->setPermission("helpui.use");
         $this->plugin = $plugin;
@@ -24,7 +24,7 @@ class HelpCommand extends Command{
     public function execute(CommandSender $sender, string $label, array $args): bool{
 
         if(!$sender instanceof Player){
-            $sender->sendMessage("Run this command in-game.");
+            $sender->sendMessage("Use this command in-game.");
             return true;
         }
 
