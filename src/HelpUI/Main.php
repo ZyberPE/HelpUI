@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace HelpUI;
 
 use pocketmine\plugin\PluginBase;
-use pocketmine\command\CommandMap;
+use pocketmine\command\SimpleCommandMap;
 
 class Main extends PluginBase{
 
@@ -15,12 +15,12 @@ class Main extends PluginBase{
 
         $commandMap = $this->getServer()->getCommandMap();
 
-        $this->unregisterHelp($commandMap);
+        $this->removeDefaultHelp($commandMap);
 
         $commandMap->register("helpui", new HelpCommand($this));
     }
 
-    private function unregisterHelp(CommandMap $commandMap): void{
+    private function removeDefaultHelp(SimpleCommandMap $commandMap): void{
 
         $command = $commandMap->getCommand("help");
 
@@ -28,17 +28,21 @@ class Main extends PluginBase{
             $commandMap->unregister($command);
         }
 
-        $knownCommands = $commandMap->getKnownCommands();
-
-        foreach($knownCommands as $name => $cmd){
-            if($name === "help"){
-                unset($knownCommands[$name]);
-            }
-        }
-
         $reflection = new \ReflectionClass($commandMap);
-        $property = $reflection->getProperty("knownCommands");
-        $property->setAccessible(true);
-        $property->setValue($commandMap, $knownCommands);
+
+        if($reflection->hasProperty("knownCommands")){
+            $property = $reflection->getProperty("knownCommands");
+            $property->setAccessible(true);
+
+            $commands = $property->getValue($commandMap);
+
+            foreach($commands as $name => $cmd){
+                if($name === "help"){
+                    unset($commands[$name]);
+                }
+            }
+
+            $property->setValue($commandMap, $commands);
+        }
     }
 }
